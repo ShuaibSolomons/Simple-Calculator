@@ -3,6 +3,8 @@ namespace Calculator
 {
   class Calculator
   {
+    static int counter = 0;
+
     public static int computation(int val1, int val2, string constructor)
     {
       switch(constructor){
@@ -25,11 +27,10 @@ namespace Calculator
       return equationSeparated;
     }
 
-    public static int calculator(string equation)
+    public static int calculator(string equation, int oldValue)
     {
       string[] equationSeparated = separateBySpace(equation);
-      int counter = 0;
-      int previousValue = 0;
+      int previousValue = oldValue;
       int n;
 
       if(counter == 0)
@@ -56,6 +57,15 @@ namespace Calculator
           return previousValue;
         }
       }
+      else
+      {
+        for (int i = 0; i<equationSeparated.Length-1; i++)
+        {
+          previousValue = computation(previousValue, Int32.Parse(equationSeparated[i+1]), equationSeparated[i]);
+          i += 1;
+        }
+        return previousValue;
+      }
 
       int val = -1;
       return val;
@@ -63,7 +73,10 @@ namespace Calculator
 
     static void Main(string[] args)
     {
-      int val = calculator("1 + 1 - 1");
+      int oldValue = 0;
+      int val = calculator("1 + 1 - 1 - 1", oldValue);
+      oldValue = val;
+      val = calculator("+ 1 / 1 + 2", oldValue);
       Console.WriteLine(val);
     }
   }
