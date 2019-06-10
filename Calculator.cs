@@ -67,17 +67,34 @@ namespace Calculator
         return previousValue;
       }
 
-      int val = -1;
+      int val;
       return val;
     }
 
     static void Main(string[] args)
     {
       int oldValue = 0;
-      int val = calculator("1 + 1 - 1 - 1", oldValue);
-      oldValue = val;
-      val = calculator("+ 1 / 1 + 2", oldValue);
-      Console.WriteLine(val);
+      //int val = calculator("1 + 1 - 1 - 1", oldValue);
+      //oldValue = val;
+      //val = calculator("+ 1 / 1 + 2", oldValue);
+      //Console.WriteLine(val);
+
+      string val = "";
+      bool helper = true;
+      Console.WriteLine("Welcome to the the Simple Calculator if you need to stop the program type: exit");
+      while(helper == true)
+      {
+        Console.Write("Enter Integer: ");
+        val = Console.ReadLine();
+        if(val.ToLower().Trim() == "exit")
+        {
+          helper = false;
+          break;
+        }
+        oldValue = calculator(val, oldValue);
+        Console.WriteLine(oldValue);
+      }
+
     }
   }
 }
